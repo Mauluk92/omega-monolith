@@ -6,6 +6,7 @@
                       https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
     <!-- BOOK SECTION -->
     <include file="/db/changelog/2024/01/18-01-book-changelog.xml"/>
+    <include file="/db/changelog/2024/01/18-01-book-fix-01-changelog.xml"/>
     <!-- END BOOK SECTION -->
 
     <!-- AUTHOR SECTION -->
