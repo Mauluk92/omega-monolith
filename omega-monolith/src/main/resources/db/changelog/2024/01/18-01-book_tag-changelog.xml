@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+
+    <changeSet id="18-01-book_author-changeset-01" author="nicola" runOnChange="true">
+        <createTable tableName="book_tag">
+            <column name="book_tag_id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="book_id" type="bigint">
+                <constraints referencedTableName="book" referencedColumnNames="id" foreignKeyName="fk_book_id_tag"/>
+            </column>
+            <column name="tag_id" type="bigint">
+                <constraints referencedTableName="tag" referencedColumnNames="id" foreignKeyName="fk_tag_id_book"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
