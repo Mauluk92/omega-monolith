@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <!-- BOOK SECTION -->
+    <include file="/db/changelog/2024/01/18-01-book-changelog.xml"/>
+    <!-- END BOOK SECTION -->
+
+    <!-- AUTHOR SECTION -->
+    <include file="/db/changelog/2024/01/18-01-author-changelog.xml"/>
+    <!-- END AUTHOR SECTION -->
+
+    <!-- TAG SECTION -->
+    <include file="/db/changelog/2024/01/18-01-tag-changelog.xml"/>
+    <!-- END TAG SECTION -->
+</databaseChangeLog>
