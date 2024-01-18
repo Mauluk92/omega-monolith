@@ -15,4 +15,9 @@
     <!-- TAG SECTION -->
     <include file="/db/changelog/2024/01/18-01-tag-changelog.xml"/>
     <!-- END TAG SECTION -->
+
+    <!-- JOIN TABLES SECTION -->
+    <include file="/db/changelog/2024/01/18-01-book_author-changelog.xml"/>
+    <include file="/db/changelog/2024/01/18-01-book_tag-changelog.xml"/>
+    <!-- END JOIN TABLES SECTION -->
 </databaseChangeLog>
