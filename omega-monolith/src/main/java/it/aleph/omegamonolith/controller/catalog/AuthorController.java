@@ -37,11 +37,4 @@ public class AuthorController {
     public AuthorDto updateAuthorById(@PathVariable Long id, @RequestBody @Valid AuthorDto updateAuthorDto){
         return authorService.updateAuthorById(id, updateAuthorDto);
     }
-
-    @GetMapping("/authors")
-    public List<AuthorDto> searchAuthors(@RequestParam(defaultValue = "0") Integer pageNum,
-                                         @RequestParam(defaultValue = "10")Integer pageSize,
-                                         @RequestParam(required = false) String name){
-        return authorService.searchAuthors(pageSize, pageNum, name);
-    }
 }
