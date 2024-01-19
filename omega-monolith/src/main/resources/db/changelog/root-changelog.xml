@@ -33,6 +33,7 @@
 
     <!-- LOAN SECTION -->
     <include file="/db/changelog/2024/01/19-01-loan-init-changelog-01.xml"/>
+    <include file="/db/changelog/2024/01/19-01-loan-relationships-changelog-01.xml"/>
     <!-- END LOAN SECTION -->
 
     <!-- USER SECTION -->
