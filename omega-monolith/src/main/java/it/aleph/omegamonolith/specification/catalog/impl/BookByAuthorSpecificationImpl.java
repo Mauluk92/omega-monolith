@@ -33,7 +33,7 @@ public class BookByAuthorSpecificationImpl implements BookSpecificationBuilder, 
         Join<Book, Author> booksByAuthor = root.join(AUTHOR_FIELD_IN_BOOK);
         return Objects.nonNull(searchBooksDto.getAuthorId())
                 ? criteriaBuilder.equal(booksByAuthor.get(AUTHOR_FIELD), searchBooksDto.getAuthorId())
-                : criteriaBuilder.conjunction();
+                : criteriaBuilder.isTrue(criteriaBuilder.literal(true));
     }
 
     @Override

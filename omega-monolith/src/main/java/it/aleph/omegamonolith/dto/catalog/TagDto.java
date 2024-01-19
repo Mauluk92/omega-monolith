@@ -9,7 +9,7 @@ import lombok.Setter;
 public class TagDto {
 
     @NotNull
-    private String tag;
+    private String name;
     @NotNull
     private String description;
 

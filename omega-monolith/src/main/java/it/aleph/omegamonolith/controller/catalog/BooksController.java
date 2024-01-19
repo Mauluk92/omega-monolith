@@ -18,11 +18,12 @@ public class BooksController {
     private final BookService bookService;
 
     @GetMapping
-    public List<BookDto> filteredBookSearch(@RequestParam(defaultValue = "0") Integer pageNum,
-                                            @RequestParam(defaultValue = "10") Integer pageSize,
+    public List<BookDto> filteredBookSearch(@RequestParam(defaultValue = "0", name="pageNum") Integer pageNum,
+                                            @RequestParam(defaultValue = "10", name="pageSize") Integer pageSize,
                                             @RequestParam(required = false) Long authorId,
                                             @RequestParam(required = false) Long tagId,
-                                            @RequestParam(required = false) String title){
+                                            @RequestParam(required = false) String title,
+                                            @RequestParam(required = false) String address){
         return bookService.filteredBookSearch(pageSize, pageNum, authorId, tagId, title);
     }
 }

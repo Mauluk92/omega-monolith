@@ -1,5 +1,7 @@
 package it.aleph.omegamonolith.dto.catalog;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
@@ -21,13 +23,15 @@ public class BookDto {
     @Pattern(regexp = "^\\d{3}\\.\\d+$", message = "Dewey Decimal Code should have the following format: xxx.xx...")
     private String deweyDecimalCode;
     @NotNull
-    private String contentDescription;
+    private String description;
     @NotNull
     private Date pubDate;
     @NotNull
     private String pubHouse;
     @NotNull
-    private Boolean available;
+    private Boolean availability;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private String cutterNumber;
 
 
     private List<AuthorDto> authorList;

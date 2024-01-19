@@ -1,5 +1,9 @@
 package it.aleph.omegamonolith.service.catalog.impl;
 
+import it.aleph.omegamonolith.cutter.calculator.CutterCalculator;
+import it.aleph.omegamonolith.cutter.calculator.impl.BasicCutterCalculator;
+import it.aleph.omegamonolith.cutter.mapping.CutterTableMappingBuilder;
+import it.aleph.omegamonolith.cutter.mapping.impl.CutterTableMappingBuilderImpl;
 import it.aleph.omegamonolith.dao.catalog.AuthorRepository;
 import it.aleph.omegamonolith.dao.catalog.BookRepository;
 import it.aleph.omegamonolith.dao.catalog.TagRepository;
@@ -23,7 +27,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -52,7 +58,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookDto updateBookStatus(Long id, Boolean status) {
         Book obtainedBook = accessResource(id);
-        obtainedBook.setAvailable(status);
+        obtainedBook.setAvailability(status);
         bookRepository.save(obtainedBook);
         return bookDtoMapper.toDto(obtainedBook);
     }
@@ -99,7 +105,7 @@ public class BookServiceImpl implements BookService {
         return specificationBuilderList.stream()
                 .map(specificationBuilder -> specificationBuilder
                         .setFilter(searchBooksDto)
-                        .build()).reduce(Specification::and).orElse(null);
+                        .build()).reduce(Specification::and).orElse(Specification.where(null));
     }
 
     private Book accessResource(Long id){
@@ -107,7 +113,29 @@ public class BookServiceImpl implements BookService {
     }
 
     private RuntimeException buildNotFoundException(List<Long> idList){
-        return NotFoundException.builder().idListNotFound(idList).message("The following id was not found: ").build();
+        return NotFoundException.builder().idListNotFound(idList).message("The following id was not found: " + idList).build();
+    }
+    private CutterCalculator buildCutterCalculator(){
+        CutterTableMappingBuilder builderVowels = new CutterTableMappingBuilderImpl();
+        Map<Character , Character> mappingVowels = builderVowels
+                .singleCharacter('b','2')
+                .singleCharacter('d', '3')
+                .range('l','m', '4')
+                .singleCharacter('n', '5')
+                .singleCharacter('p', '6')
+                .singleCharacter('r', '7')
+                .range('s', 't', '8')
+                .range('u', 'y', '9')
+                .build();
+        Map<Character, Map<Character, Character>> globalMapping = new HashMap<>();
+        globalMapping.put('a', mappingVowels);
+        globalMapping.put('e', mappingVowels);
+        globalMapping.put('i', mappingVowels);
+        globalMapping.put('o', mappingVowels);
+        globalMapping.put('u', mappingVowels);
+        BasicCutterCalculator basicCalculator = new BasicCutterCalculator();
+        basicCalculator.setCutterTableMapping(globalMapping);
+        return basicCalculator;
     }
 
 }

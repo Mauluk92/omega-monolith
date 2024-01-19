@@ -34,7 +34,7 @@ public class BookByTitleSpecificationImpl implements BookSpecificationBuilder, S
     public Predicate toPredicate(@Nonnull Root<Book> root, @Nonnull CriteriaQuery<?> query, @Nonnull CriteriaBuilder criteriaBuilder) {
         return Objects.nonNull(searchBooksDto.getTitle()) ?
                 criteriaBuilder.like(root.get(BOOK_FIELD), "%" + searchBooksDto.getTitle() + "%") :
-                criteriaBuilder.conjunction();
+                criteriaBuilder.isTrue(criteriaBuilder.literal(true));
     }
 
     @Override

@@ -33,7 +33,7 @@ public class AuthorByNameSpecificationImpl implements Specification<Author>, Aut
     public Predicate toPredicate(@Nonnull Root<Author> root, @Nonnull CriteriaQuery<?> query, @Nonnull CriteriaBuilder criteriaBuilder) {
         return Objects.nonNull(searchAuthorsDto.getName()) ?
                 criteriaBuilder.like(root.get(AUTHOR_FIELD), "%" + searchAuthorsDto.getName() + "%") :
-                criteriaBuilder.conjunction();
+                criteriaBuilder.isTrue(criteriaBuilder.literal(true));
     }
 
     @Override

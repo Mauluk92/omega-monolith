@@ -30,7 +30,9 @@ public class Book {
     @Column(nullable=false, name="pub_house")
     private String pubHouse;
     @Column(nullable=false, name="availability")
-    private Boolean available;
+    private Boolean availability;
+    @Column(nullable = false, name="cutter_number")
+    private String cutterNumber;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "book_author",

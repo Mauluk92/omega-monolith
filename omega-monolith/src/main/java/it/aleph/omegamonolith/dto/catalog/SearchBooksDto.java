@@ -12,4 +12,5 @@ public class SearchBooksDto {
     private Long tagId;
     private Long authorId;
     private String title;
+    private String cutterNumber;
 }
