@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-public class NotFoundException extends RuntimeException{
+public class NotFoundException extends RuntimeException {
     private List<Long> idListNotFound;
     private String message;
 }
