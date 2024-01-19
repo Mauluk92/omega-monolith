@@ -20,11 +20,11 @@ public class CreateBookDto {
     @Pattern(regexp = "^\\d{3}\\.\\d+$", message = "Dewey Decimal Code should have the following format: xxx.xx...")
     private String deweyDecimalCode;
     @NotNull
-    private String contentDescription;
+    private String description;
     @NotNull
     private Date pubDate;
     @NotNull
     private String pubHouse;
     @NotNull
-    private Boolean available;
+    private Boolean availability;
 }

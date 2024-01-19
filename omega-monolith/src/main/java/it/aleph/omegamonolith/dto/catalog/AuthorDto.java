@@ -9,8 +9,6 @@ import lombok.Setter;
 public class AuthorDto {
 
     @NotNull
-    private Long id;
-    @NotNull
     private String name;
     @NotNull
     private String biography;

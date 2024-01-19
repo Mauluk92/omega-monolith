@@ -33,7 +33,7 @@ public class TagByNameSpecificationImpl implements Specification<Tag>, TagSpecif
     public Predicate toPredicate(@Nonnull Root<Tag> root, @Nonnull CriteriaQuery<?> query, @Nonnull CriteriaBuilder criteriaBuilder) {
         return Objects.nonNull(searchTagsDto.getTag()) ?
                 criteriaBuilder.like(root.get(TAG_FIELD), "%" + searchTagsDto.getTag() + "%") :
-                criteriaBuilder.conjunction();
+                criteriaBuilder.isTrue(criteriaBuilder.literal(true));
     }
 
     @Override

@@ -7,6 +7,7 @@
     <!-- BOOK SECTION -->
     <include file="/db/changelog/2024/01/18-01-book-changelog.xml"/>
     <include file="/db/changelog/2024/01/18-01-book-fix-01-changelog.xml"/>
+    <include file="/db/changelog/2024/01/19-01-book-cutter-changelog.xml"/>
     <!-- END BOOK SECTION -->
 
     <!-- AUTHOR SECTION -->
@@ -20,5 +21,6 @@
     <!-- JOIN TABLES SECTION -->
     <include file="/db/changelog/2024/01/18-01-book_author-changelog.xml"/>
     <include file="/db/changelog/2024/01/18-01-book_tag-changelog.xml"/>
+    <include file="/db/changelog/2024/01/19-01-auto-increment-join-tables-changelog.xml"/>
     <!-- END JOIN TABLES SECTION -->
 </databaseChangeLog>
