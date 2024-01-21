@@ -1,18 +1,15 @@
-package it.aleph.omegamonolith.dto.catalog;
+package it.aleph.omegamonolith.dto.catalog.book;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
-public class BookDto {
+public class CreateBookDto {
 
     @NotNull
     private String title;
@@ -30,10 +27,4 @@ public class BookDto {
     private String pubHouse;
     @NotNull
     private Boolean availability;
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private String cutterNumber;
-
-
-    private List<AuthorDto> authorList;
-    private List<TagDto> tagList;
 }

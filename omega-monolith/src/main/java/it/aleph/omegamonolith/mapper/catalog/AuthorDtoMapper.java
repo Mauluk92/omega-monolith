@@ -1,6 +1,6 @@
 package it.aleph.omegamonolith.mapper.catalog;
 
-import it.aleph.omegamonolith.dto.catalog.AuthorDto;
+import it.aleph.omegamonolith.dto.catalog.author.AuthorDto;
 import it.aleph.omegamonolith.model.catalog.Author;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;

@@ -1,6 +1,6 @@
 package it.aleph.omegamonolith.dto.loan;
 
-import it.aleph.omegamonolith.dto.catalog.BookDto;
+import it.aleph.omegamonolith.dto.catalog.book.BookDto;
 import it.aleph.omegamonolith.dto.user.UserDto;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;

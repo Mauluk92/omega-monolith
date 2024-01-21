@@ -1,6 +1,6 @@
 package it.aleph.omegamonolith.service.catalog;
 
-import it.aleph.omegamonolith.dto.catalog.TagDto;
+import it.aleph.omegamonolith.dto.catalog.tag.TagDto;
 
 import java.util.List;
 

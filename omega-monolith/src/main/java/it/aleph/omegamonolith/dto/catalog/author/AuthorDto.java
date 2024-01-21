@@ -1,4 +1,4 @@
-package it.aleph.omegamonolith.dto.catalog;
+package it.aleph.omegamonolith.dto.catalog.author;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -6,11 +6,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class TagDto {
+public class AuthorDto {
 
     @NotNull
     private String name;
     @NotNull
-    private String description;
+    private String biography;
 
 }

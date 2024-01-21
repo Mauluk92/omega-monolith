@@ -1,4 +1,4 @@
-package it.aleph.omegamonolith.dto.catalog;
+package it.aleph.omegamonolith.dto.catalog.tag;
 
 import lombok.Builder;
 import lombok.Getter;

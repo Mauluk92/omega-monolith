@@ -1,8 +1,8 @@
 package it.aleph.omegamonolith.service.catalog.impl;
 
 import it.aleph.omegamonolith.dao.catalog.TagRepository;
-import it.aleph.omegamonolith.dto.catalog.SearchTagsDto;
-import it.aleph.omegamonolith.dto.catalog.TagDto;
+import it.aleph.omegamonolith.dto.catalog.tag.SearchTagsDto;
+import it.aleph.omegamonolith.dto.catalog.tag.TagDto;
 import it.aleph.omegamonolith.exception.NotFoundException;
 import it.aleph.omegamonolith.mapper.catalog.TagDtoMapper;
 import it.aleph.omegamonolith.model.catalog.Tag;
