@@ -5,8 +5,10 @@ import it.aleph.omegamonolith.dto.loan.LoanDto;
 import it.aleph.omegamonolith.dto.loan.LoanStatusDto;
 import it.aleph.omegamonolith.service.loan.LoanService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
+@RestController
 public class LoanControllerImpl implements LoanController {
 
     private final LoanService loanService;

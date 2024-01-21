@@ -4,9 +4,11 @@ import it.aleph.omegamonolith.controller.catalog.author.AuthorController;
 import it.aleph.omegamonolith.dto.catalog.author.AuthorDto;
 import it.aleph.omegamonolith.service.catalog.AuthorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @RequiredArgsConstructor
+@RestController
 public class AuthorControllerImpl implements AuthorController {
 
     private final AuthorService authorService;

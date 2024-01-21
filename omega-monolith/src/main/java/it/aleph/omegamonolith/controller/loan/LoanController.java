@@ -8,14 +8,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/loan")
-@RestController
 public interface LoanController {
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     LoanDto getLoanById(@PathVariable(name="id") Long id);
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    LoanDto issueLoan(@RequestBody LoanDto loanDto);
+    LoanDto issueLoan(@RequestBody @Valid LoanDto loanDto);
     @PatchMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     LoanDto updateLoanStatus(@PathVariable(name="id") Long id,

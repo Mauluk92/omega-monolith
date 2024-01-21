@@ -4,8 +4,10 @@ import it.aleph.omegamonolith.controller.catalog.tag.TagController;
 import it.aleph.omegamonolith.dto.catalog.tag.TagDto;
 import it.aleph.omegamonolith.service.catalog.TagService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
+@RestController
 public class TagControllerImpl implements TagController {
 
 
