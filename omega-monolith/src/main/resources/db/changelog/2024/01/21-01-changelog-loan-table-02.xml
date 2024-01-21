@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="21-01-loan-table-changeset-01" author="nicola" runOnChange="true">
+        <addColumn tableName="loan">
+            <column name="issued_timestamp" defaultOnNull="true" defaultValue="CURRENT_TIMESTAMP()" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <dropColumn tableName="loan" columnName="end_date"/>
+        <addColumn tableName="loan">
+            <column name="end_date" type="date">
+                <constraints nullable="false" checkConstraint="CHECK(start_date > end_date AND issued_timestamp >= start_date)"/>
+            </column>
+        </addColumn>
+        <dropColumn tableName="loan" columnName="status"/>
+        <addColumn tableName="loan">
+            <column name="status" type="varchar(255)">
+                <constraints nullable="false" checkConstraint="CHECK(status IN('ISSUED', 'ACCEPTED', 'EXPIRED', 'CLOSED', 'REJECTED'))"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="21-01-table-changeset-03" author="nicola" runOnChange="true">
+        <dropColumn tableName="user" columnName="username"/>
+        <addColumn tableName="user">
+            <column name="username" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

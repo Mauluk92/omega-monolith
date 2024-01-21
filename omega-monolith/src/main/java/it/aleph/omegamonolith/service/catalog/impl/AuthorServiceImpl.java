@@ -1,8 +1,8 @@
 package it.aleph.omegamonolith.service.catalog.impl;
 
 import it.aleph.omegamonolith.dao.catalog.AuthorRepository;
-import it.aleph.omegamonolith.dto.catalog.AuthorDto;
-import it.aleph.omegamonolith.dto.catalog.SearchAuthorsDto;
+import it.aleph.omegamonolith.dto.catalog.author.AuthorDto;
+import it.aleph.omegamonolith.dto.catalog.author.SearchAuthorsDto;
 import it.aleph.omegamonolith.exception.NotFoundException;
 import it.aleph.omegamonolith.mapper.catalog.AuthorDtoMapper;
 import it.aleph.omegamonolith.model.catalog.Author;

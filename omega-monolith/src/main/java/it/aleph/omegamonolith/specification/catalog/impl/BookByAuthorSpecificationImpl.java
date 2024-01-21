@@ -1,6 +1,6 @@
 package it.aleph.omegamonolith.specification.catalog.impl;
 
-import it.aleph.omegamonolith.dto.catalog.SearchBooksDto;
+import it.aleph.omegamonolith.dto.catalog.book.SearchBooksDto;
 import it.aleph.omegamonolith.model.catalog.Author;
 import it.aleph.omegamonolith.model.catalog.Book;
 import it.aleph.omegamonolith.specification.catalog.BookSpecificationBuilder;

@@ -1,8 +1,8 @@
 package it.aleph.omegamonolith.service.catalog;
 
-import it.aleph.omegamonolith.dto.catalog.AssociateBookDto;
-import it.aleph.omegamonolith.dto.catalog.BookDto;
-import it.aleph.omegamonolith.dto.catalog.CreateBookDto;
+import it.aleph.omegamonolith.dto.catalog.book.AssociateBookDto;
+import it.aleph.omegamonolith.dto.catalog.book.BookDto;
+import it.aleph.omegamonolith.dto.catalog.book.CreateBookDto;
 
 import java.util.List;
 

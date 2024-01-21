@@ -1,6 +1,6 @@
 package it.aleph.omegamonolith.service.catalog;
 
-import it.aleph.omegamonolith.dto.catalog.AuthorDto;
+import it.aleph.omegamonolith.dto.catalog.author.AuthorDto;
 
 import java.util.List;
 

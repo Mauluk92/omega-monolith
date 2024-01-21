@@ -1,4 +1,4 @@
-package it.aleph.omegamonolith.dto.catalog;
+package it.aleph.omegamonolith.dto.catalog.book;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

@@ -1,7 +1,7 @@
 package it.aleph.omegamonolith.mapper.catalog;
 
-import it.aleph.omegamonolith.dto.catalog.BookDto;
-import it.aleph.omegamonolith.dto.catalog.CreateBookDto;
+import it.aleph.omegamonolith.dto.catalog.book.BookDto;
+import it.aleph.omegamonolith.dto.catalog.book.CreateBookDto;
 import it.aleph.omegamonolith.model.catalog.Book;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;

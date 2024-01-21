@@ -1,6 +1,6 @@
 package it.aleph.omegamonolith.mapper.catalog;
 
-import it.aleph.omegamonolith.dto.catalog.TagDto;
+import it.aleph.omegamonolith.dto.catalog.tag.TagDto;
 import it.aleph.omegamonolith.model.catalog.Tag;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
