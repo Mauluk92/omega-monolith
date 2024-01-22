@@ -10,10 +10,12 @@ import it.aleph.omegamonolith.service.catalog.BookService;
 import it.aleph.omegamonolith.service.loan.LoanService;
 import it.aleph.omegamonolith.service.user.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -37,9 +39,11 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public LoanDto issueLoan(LoanDto loanDto) {
         loanDto.setIssuedTimestamp(Instant.now());
-        loanDto.setLoanStatus(LoanStatusDto.ISSUED);
         loanDto.setAssociatedUser(userService.findUserById(loanDto.getUserId()));
         loanDto.setAssociatedBook(bookService.getBookById(loanDto.getBookId()));
+        Optional<Loan> loanObtained = Optional.ofNullable(loanRepository.findOverlappingLoans(loanDto.getBookId(), loanDto.getStartDate(), loanDto.getEndDate()));
+        loanObtained.ifPresentOrElse(l -> loanDto.setLoanStatus(LoanStatusDto.REJECTED), () -> loanDto.setLoanStatus(LoanStatusDto.ISSUED));
+        loanRepository.save(loanDtoMapper.toEntity(loanDto));
         return loanDto;
     }
 
