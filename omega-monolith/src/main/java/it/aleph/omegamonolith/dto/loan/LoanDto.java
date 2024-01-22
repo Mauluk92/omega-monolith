@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import it.aleph.omegamonolith.constraint.loan.annotations.LoanDateConstraint;
+import it.aleph.omegamonolith.constraint.loan.annotations.LoanNoPastDateConstraint;
 import it.aleph.omegamonolith.dto.catalog.book.BookDto;
 import it.aleph.omegamonolith.dto.user.UserDto;
 import jakarta.validation.constraints.NotNull;
@@ -18,7 +19,9 @@ import java.util.Date;
 @Setter
 @LoanDateConstraint
 public class LoanDto {
+
     @NotNull
+    @LoanNoPastDateConstraint
     private Date startDate;
     @NotNull
     private Date endDate;
