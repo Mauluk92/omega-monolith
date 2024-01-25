@@ -3,7 +3,7 @@ package it.aleph.omegamonolith.specification.catalog.impl;
 import it.aleph.omegamonolith.dto.catalog.book.SearchBooksDto;
 import it.aleph.omegamonolith.model.catalog.Book;
 import it.aleph.omegamonolith.specification.catalog.BookSpecificationBuilder;
-import it.aleph.omegamonolith.specification.catalog.SpecificationBuilder;
+import it.aleph.omegamonolith.specification.SpecificationBuilder;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;

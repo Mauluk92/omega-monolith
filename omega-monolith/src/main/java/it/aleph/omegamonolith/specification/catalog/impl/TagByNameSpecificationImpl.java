@@ -2,7 +2,7 @@ package it.aleph.omegamonolith.specification.catalog.impl;
 
 import it.aleph.omegamonolith.dto.catalog.tag.SearchTagsDto;
 import it.aleph.omegamonolith.model.catalog.Tag;
-import it.aleph.omegamonolith.specification.catalog.SpecificationBuilder;
+import it.aleph.omegamonolith.specification.SpecificationBuilder;
 import it.aleph.omegamonolith.specification.catalog.TagSpecificationBuilder;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.criteria.CriteriaBuilder;

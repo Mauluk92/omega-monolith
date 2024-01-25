@@ -1,4 +1,4 @@
-package it.aleph.omegamonolith.specification.catalog;
+package it.aleph.omegamonolith.specification;
 
 import org.springframework.data.jpa.domain.Specification;
 
