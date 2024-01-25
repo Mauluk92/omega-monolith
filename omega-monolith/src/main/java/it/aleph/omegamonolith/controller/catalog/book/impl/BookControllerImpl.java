@@ -16,7 +16,7 @@ public class BookControllerImpl implements BookController {
     private final BookService bookService;
 
     @Override
-    public BookDto addBook(CreateBookDto createBookDto){
+    public CreateBookDto addBook(CreateBookDto createBookDto){
         return bookService.addBook(createBookDto);
     }
 
@@ -44,6 +44,4 @@ public class BookControllerImpl implements BookController {
     public BookDto updateBookById(Long id, BookDto updateBookDto){
         return bookService.updateBook(id, updateBookDto);
     }
-
-
 }

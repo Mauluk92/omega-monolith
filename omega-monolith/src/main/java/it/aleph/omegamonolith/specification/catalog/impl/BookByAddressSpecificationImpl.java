@@ -18,10 +18,11 @@ import java.util.Objects;
 
 @Component
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-public class BookByCutterNumberSpecificationImpl implements BookSpecificationBuilder, Specification<Book> {
+public class BookByAddressSpecificationImpl implements BookSpecificationBuilder, Specification<Book> {
 
     private SearchBooksDto searchBooksDto;
-    private final static String BOOK_FIELD = "cutterNumber";
+    private final static String BOOK_FIELD_FIRST = "deweyDecimalCode";
+    private final static String BOOK_FIELD_SECOND = "cutterNumber";
     @Override
     public SpecificationBuilder<SearchBooksDto, Book> setFilter(SearchBooksDto searchBooksDto) {
         this.searchBooksDto = searchBooksDto;
@@ -30,8 +31,8 @@ public class BookByCutterNumberSpecificationImpl implements BookSpecificationBui
 
     @Override
     public Predicate toPredicate(@Nonnull Root<Book> root, @Nonnull CriteriaQuery<?> query, @Nonnull CriteriaBuilder criteriaBuilder) {
-        return Objects.nonNull(searchBooksDto.getCutterNumber()) ?
-                criteriaBuilder.equal(root.get(BOOK_FIELD), searchBooksDto.getCutterNumber()) :
+        return Objects.nonNull(searchBooksDto.getAddress()) ?
+                criteriaBuilder.equal(criteriaBuilder.concat(root.get(BOOK_FIELD_FIRST), root.get(BOOK_FIELD_SECOND)),criteriaBuilder.literal(searchBooksDto.getAddress())) :
                 criteriaBuilder.isTrue(criteriaBuilder.literal(true));
     }
 

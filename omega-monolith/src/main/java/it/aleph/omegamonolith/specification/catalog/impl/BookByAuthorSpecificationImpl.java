@@ -29,11 +29,12 @@ public class BookByAuthorSpecificationImpl implements BookSpecificationBuilder, 
     }
 
     @Override
-    public Predicate toPredicate(Root<Book> root,@Nonnull CriteriaQuery<?> query, @Nonnull CriteriaBuilder criteriaBuilder) {
-        Join<Book, Author> booksByAuthor = root.join(AUTHOR_FIELD_IN_BOOK);
-        return Objects.nonNull(searchBooksDto.getAuthorId())
-                ? criteriaBuilder.equal(booksByAuthor.get(AUTHOR_FIELD), searchBooksDto.getAuthorId())
-                : criteriaBuilder.isTrue(criteriaBuilder.literal(true));
+    public Predicate toPredicate(@Nonnull Root<Book> root,@Nonnull CriteriaQuery<?> query, @Nonnull CriteriaBuilder criteriaBuilder) {
+        if(Objects.nonNull(searchBooksDto.getAuthorId())){
+            Join<Book, Author> booksByAuthor = root.join(AUTHOR_FIELD_IN_BOOK);
+            return criteriaBuilder.equal(booksByAuthor.get(AUTHOR_FIELD), searchBooksDto.getAuthorId());
+        }
+        return criteriaBuilder.isTrue(criteriaBuilder.literal(true));
     }
 
     @Override

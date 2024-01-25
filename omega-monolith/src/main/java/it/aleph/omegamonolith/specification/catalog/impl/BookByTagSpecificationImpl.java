@@ -28,11 +28,12 @@ public class BookByTagSpecificationImpl implements BookSpecificationBuilder, Spe
         return this;
     }
     @Override
-    public Predicate toPredicate(Root<Book> root, @Nonnull CriteriaQuery<?> query, @Nonnull CriteriaBuilder criteriaBuilder) {
-        Join<Book, Tag> booksByTag = root.join(TAG_FIELD_IN_BOOK);
-        return Objects.nonNull(searchBooksDto.getTagId())
-                ? criteriaBuilder.equal(booksByTag.get(TAG_FIELD), searchBooksDto.getTagId())
-                : criteriaBuilder.isTrue(criteriaBuilder.literal(true));
+    public Predicate toPredicate(@Nonnull Root<Book> root, @Nonnull CriteriaQuery<?> query, @Nonnull CriteriaBuilder criteriaBuilder) {
+        if(Objects.nonNull(searchBooksDto.getTagId())){
+            Join<Book, Tag> booksByTag = root.join(TAG_FIELD_IN_BOOK);
+            return criteriaBuilder.equal(booksByTag.get(TAG_FIELD), searchBooksDto.getTagId());
+        }
+        return criteriaBuilder.isTrue(criteriaBuilder.literal(true));
     }
 
     @Override
