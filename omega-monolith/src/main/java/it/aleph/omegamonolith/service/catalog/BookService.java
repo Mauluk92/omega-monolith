@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface BookService {
 
-    BookDto addBook(CreateBookDto createBookDto);
+    CreateBookDto addBook(CreateBookDto createBookDto);
     BookDto updateBook(Long id, BookDto updateBookDto);
     BookDto updateBookStatus(Long id, Boolean status);
     BookDto getBookById(Long id);
     void removeBookById(Long id);
     BookDto associateBook(Long id,  AssociateBookDto associateBookDto);
-    List<BookDto> filteredBookSearch(Integer pageSize, Integer pageNum, Long authorId, Long tagId, String title);
+    List<BookDto> filteredBookSearch(Integer pageSize, Integer pageNum, Long authorId, Long tagId, String title, String address);
 }

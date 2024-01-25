@@ -13,6 +13,8 @@ import java.util.List;
 public interface BookDtoMapper {
     Book toEntity(CreateBookDto createBookDto);
     BookDto toDto(Book entity);
+
+    CreateBookDto toCreateDto(Book entity);
     void updateBook(@MappingTarget Book toUpdate, BookDto updated);
     List<BookDto> toBookDtoList(List<Book> entityList);
 }

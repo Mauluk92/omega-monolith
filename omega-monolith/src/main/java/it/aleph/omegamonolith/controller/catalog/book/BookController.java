@@ -13,7 +13,7 @@ public interface BookController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    BookDto addBook(@RequestBody @Valid CreateBookDto createBookDto);
+    CreateBookDto addBook(@RequestBody @Valid CreateBookDto createBookDto);
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     BookDto getBookById(@PathVariable(name="id") Long id);

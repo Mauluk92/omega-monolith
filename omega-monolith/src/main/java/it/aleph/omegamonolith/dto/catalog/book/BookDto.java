@@ -15,6 +15,8 @@ import java.util.List;
 @Setter
 public class BookDto {
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Long id;
     @NotNull
     private String title;
     @NotNull

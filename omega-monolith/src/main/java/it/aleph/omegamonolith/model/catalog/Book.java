@@ -1,6 +1,7 @@
 package it.aleph.omegamonolith.model.catalog;
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,7 +32,7 @@ public class Book {
     private String pubHouse;
     @Column(nullable=false, name="availability")
     private Boolean availability;
-    @Column(nullable = false, name="cutter_number")
+    @Column(nullable =false, name="cutter_number")
     private String cutterNumber;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})

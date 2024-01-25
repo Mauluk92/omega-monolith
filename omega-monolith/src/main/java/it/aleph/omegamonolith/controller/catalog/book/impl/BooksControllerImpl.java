@@ -20,6 +20,6 @@ public class BooksControllerImpl implements BooksController {
                                             Long tagId,
                                             String title,
                                             String address){
-        return bookService.filteredBookSearch(pageSize, pageNum, authorId, tagId, title);
+        return bookService.filteredBookSearch(pageSize, pageNum, authorId, tagId, title, address);
     }
 }

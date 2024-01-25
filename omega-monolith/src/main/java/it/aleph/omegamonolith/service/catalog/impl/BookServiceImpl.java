@@ -1,9 +1,6 @@
 package it.aleph.omegamonolith.service.catalog.impl;
 
-import it.aleph.omegamonolith.cutter.calculator.CutterCalculator;
-import it.aleph.omegamonolith.cutter.calculator.impl.BasicCutterCalculator;
-import it.aleph.omegamonolith.cutter.mapping.CutterTableMappingBuilder;
-import it.aleph.omegamonolith.cutter.mapping.impl.CutterTableMappingBuilderImpl;
+import it.aleph.omegamonolith.cutter.model.CutterNumberFact;
 import it.aleph.omegamonolith.dao.catalog.AuthorRepository;
 import it.aleph.omegamonolith.dao.catalog.BookRepository;
 import it.aleph.omegamonolith.dao.catalog.TagRepository;
@@ -11,7 +8,9 @@ import it.aleph.omegamonolith.dto.catalog.book.AssociateBookDto;
 import it.aleph.omegamonolith.dto.catalog.book.BookDto;
 import it.aleph.omegamonolith.dto.catalog.book.CreateBookDto;
 import it.aleph.omegamonolith.dto.catalog.book.SearchBooksDto;
+import it.aleph.omegamonolith.exception.CutterProcessingException;
 import it.aleph.omegamonolith.exception.NotFoundException;
+import it.aleph.omegamonolith.mapper.catalog.BookCutterFactMapping;
 import it.aleph.omegamonolith.mapper.catalog.BookDtoMapper;
 import it.aleph.omegamonolith.model.catalog.Author;
 import it.aleph.omegamonolith.model.catalog.Book;
@@ -19,6 +18,9 @@ import it.aleph.omegamonolith.model.catalog.Tag;
 import it.aleph.omegamonolith.service.catalog.BookService;
 import it.aleph.omegamonolith.specification.catalog.BookSpecificationBuilder;
 import lombok.RequiredArgsConstructor;
+import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.rule.FactHandle;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,9 +29,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -39,12 +41,43 @@ public class BookServiceImpl implements BookService {
     private final AuthorRepository authorRepository;
     private final TagRepository tagRepository;
     private final BookDtoMapper bookDtoMapper;
+    private final Map<String, Map<String, String>> globalCutterTable;
+    private final KieContainer kieContainer;
+    private final BookCutterFactMapping bookCutterFactMapping;
     private final ListableBeanFactory beanFactory;
 
     @Override
-    public BookDto addBook(CreateBookDto createBookDto) {
+    public CreateBookDto addBook(CreateBookDto createBookDto) {
+        CutterNumberFact fact = bookCutterFactMapping.toFact(createBookDto);
+        KieSession kieSession = kieContainer.newKieSession();
+        String accessPointLetter = fact.getAccessPoint().substring(0,1).toLowerCase();
+        Map<String, String> globalMatcher = globalCutterTable.get(accessPointLetter);
+
+
+        fact.setCutterNumberMapping(globalMatcher);
+        fact.setCutterNumberExpansionMapping(globalCutterTable.get("expansion"));
+
+
+        FactHandle factHandle = kieSession.insert(fact);
+        kieSession.fireAllRules();
+
+
+        Book bookWithCutterNumber = bookRepository.findBookWithCutterNumber(fact.getCutterNumber(), createBookDto.getTitle());
+        fact.setBookWithSameCutterNumber(bookWithCutterNumber);
+
+        kieSession.update(factHandle, fact);
+        kieSession.fireAllRules();
+        kieSession.dispose();
+
+
+        if(Objects.nonNull(fact.getCutterError())){
+            String message = fact.getCutterError().getMessage();
+            String cause = fact.getCutterError().getCause();
+            throw CutterProcessingException.builder().message(message).messageCauseList(List.of(cause)).build();
+        }
         Book book = bookDtoMapper.toEntity(createBookDto);
-        return bookDtoMapper.toDto(bookRepository.save(book));
+        bookCutterFactMapping.updateEntity(book, fact);
+        return bookDtoMapper.toCreateDto(bookRepository.save(book));
     }
 
     @Override
@@ -87,12 +120,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDto> filteredBookSearch(Integer pageSize, Integer pageNum, Long authorId, Long tagId, String title) {
+    public List<BookDto> filteredBookSearch(Integer pageSize, Integer pageNum, Long authorId, Long tagId, String title, String address) {
         SearchBooksDto searchBooksDto = SearchBooksDto
                 .builder()
                 .authorId(authorId)
                 .tagId(tagId)
                 .title(title)
+                .address(address)
                 .build();
         Sort sort = Sort.by("title");
         Pageable pageable = PageRequest.of(pageNum, pageSize, sort);
@@ -114,28 +148,6 @@ public class BookServiceImpl implements BookService {
 
     private RuntimeException buildNotFoundException(List<Long> idList){
         return NotFoundException.builder().idListNotFound(idList).message("The following id was not found: " + idList).build();
-    }
-    private CutterCalculator buildCutterCalculator(){
-        CutterTableMappingBuilder builderVowels = new CutterTableMappingBuilderImpl();
-        Map<Character , Character> mappingVowels = builderVowels
-                .singleCharacter('b','2')
-                .singleCharacter('d', '3')
-                .range('l','m', '4')
-                .singleCharacter('n', '5')
-                .singleCharacter('p', '6')
-                .singleCharacter('r', '7')
-                .range('s', 't', '8')
-                .range('u', 'y', '9')
-                .build();
-        Map<Character, Map<Character, Character>> globalMapping = new HashMap<>();
-        globalMapping.put('a', mappingVowels);
-        globalMapping.put('e', mappingVowels);
-        globalMapping.put('i', mappingVowels);
-        globalMapping.put('o', mappingVowels);
-        globalMapping.put('u', mappingVowels);
-        BasicCutterCalculator basicCalculator = new BasicCutterCalculator();
-        basicCalculator.setCutterTableMapping(globalMapping);
-        return basicCalculator;
     }
 
 }

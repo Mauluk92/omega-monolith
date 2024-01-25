@@ -16,8 +16,8 @@ public interface BooksController {
     @ResponseStatus(HttpStatus.OK)
     List<BookDto> filteredBookSearch(@RequestParam(defaultValue = "0", name="pageNum") Integer pageNum,
                                      @RequestParam(defaultValue = "10", name="pageSize") Integer pageSize,
-                                     @RequestParam(required = false) Long authorId,
-                                     @RequestParam(required = false) Long tagId,
-                                     @RequestParam(required = false) String title,
-                                     @RequestParam(required = false) String address);
+                                     @RequestParam(required = false, name="authorId") Long authorId,
+                                     @RequestParam(required = false, name="tagId") Long tagId,
+                                     @RequestParam(required = false, name="title") String title,
+                                     @RequestParam(required = false, name="address") String address);
 }
