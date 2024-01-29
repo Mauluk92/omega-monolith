@@ -15,4 +15,6 @@ public interface BookService {
     void removeBookById(Long id);
     BookDto associateBook(Long id,  AssociateBookDto associateBookDto);
     List<BookDto> filteredBookSearch(Integer pageSize, Integer pageNum, Long authorId, Long tagId, String title, String address);
+
+    void addBooks(List<BookDto> listBookDto);
 }

@@ -1,5 +1,6 @@
 package it.aleph.omegamonolith.dto.catalog.author;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,6 +8,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AuthorDto {
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Long id;
 
     @NotNull
     private String name;

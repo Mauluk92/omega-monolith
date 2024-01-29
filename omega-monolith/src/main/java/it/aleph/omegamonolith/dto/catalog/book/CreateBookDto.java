@@ -13,6 +13,8 @@ import java.util.Date;
 @Setter
 public class CreateBookDto {
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Long id;
     @NotNull
     private String title;
     @NotNull
