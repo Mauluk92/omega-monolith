@@ -12,6 +12,7 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
@@ -19,8 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoanControllerImpl implements LoanController {
 
     private final LoanService loanService;
-    private final JobLauncher jobLauncher;
-    private final Job job;
     @Override
     public LoanDto getLoanById(Long id) {
         return loanService.getLoanById(id);
@@ -39,10 +38,5 @@ public class LoanControllerImpl implements LoanController {
     @Override
     public void removeLoan(Long id) {
         loanService.removeLoan(id);
-    }
-
-    @Override
-    public void startJob() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
-        jobLauncher.run(job, new JobParameters());
     }
 }

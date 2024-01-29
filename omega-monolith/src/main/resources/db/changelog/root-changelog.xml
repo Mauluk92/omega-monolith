@@ -42,4 +42,12 @@
     <!-- END USER SECTION -->
 
     <!-- END LOAN -->
+
+    <!-- RESOURCES SECTION -->
+    <include file="/db/changelog/2024/01/26-01-resource-init-changelog.xml"/>
+    <!-- END RESOURCES SECTION -->
+
+    <!-- GROUP AND SCOPE SECTION -->
+    <include file="/db/changelog/2024/01/28-01-user-01-changelog.xml"/>
+    <!-- END GROUP AND SCOPE SECTION -->
 </databaseChangeLog>

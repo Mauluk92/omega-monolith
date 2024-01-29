@@ -8,6 +8,8 @@ import it.aleph.omegamonolith.dto.catalog.book.AssociateBookDto;
 import it.aleph.omegamonolith.dto.catalog.book.BookDto;
 import it.aleph.omegamonolith.dto.catalog.book.CreateBookDto;
 import it.aleph.omegamonolith.dto.catalog.book.SearchBooksDto;
+import it.aleph.omegamonolith.dto.resource.request.RequestedResourceOperationDto;
+import it.aleph.omegamonolith.dto.resource.request.RequestedTypeOperationDto;
 import it.aleph.omegamonolith.exception.CutterProcessingException;
 import it.aleph.omegamonolith.exception.NotFoundException;
 import it.aleph.omegamonolith.mapper.catalog.BookCutterFactMapping;
@@ -27,6 +29,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,6 +48,7 @@ public class BookServiceImpl implements BookService {
     private final KieContainer kieContainer;
     private final BookCutterFactMapping bookCutterFactMapping;
     private final ListableBeanFactory beanFactory;
+    private final KafkaTemplate<String, RequestedResourceOperationDto> kafkaTemplate;
 
     @Override
     public CreateBookDto addBook(CreateBookDto createBookDto) {
@@ -132,6 +136,16 @@ public class BookServiceImpl implements BookService {
         Pageable pageable = PageRequest.of(pageNum, pageSize, sort);
         Page<Book> page = bookRepository.findAll(buildSpecification(searchBooksDto), pageable);
         return bookDtoMapper.toBookDtoList(page.toList());
+    }
+
+    @Override
+    public void addBooks(List<BookDto> listBookDto) {
+        listBookDto.stream().map(b -> {
+            RequestedResourceOperationDto request = new RequestedResourceOperationDto();
+            request.setRequestedTypeOperationDto(RequestedTypeOperationDto.INSERTION);
+            request.setResourceType("book");
+            return request;
+        }).forEach(r -> kafkaTemplate.send("report-book-events", r));
     }
 
     private Specification<Book> buildSpecification(SearchBooksDto searchBooksDto){

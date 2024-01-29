@@ -22,4 +22,9 @@ public class BooksControllerImpl implements BooksController {
                                             String address){
         return bookService.filteredBookSearch(pageSize, pageNum, authorId, tagId, title, address);
     }
+
+    @Override
+    public void addBooks(List<BookDto> listBook) {
+        bookService.addBooks(listBook);
+    }
 }

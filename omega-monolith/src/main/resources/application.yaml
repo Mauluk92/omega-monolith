@@ -8,10 +8,10 @@ spring:
     url: jdbc:mariadb://localhost:3306/omega_legacy
     username: test
     password: test
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MariaDBDialect
   batch:
     jdbc:
       initialize-schema: always
+  kafka:
+    bootstrap-servers: localhost:9092
+server:
+  port: 8082

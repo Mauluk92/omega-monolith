@@ -14,6 +14,8 @@
 	<name>omega-monolith</name>
 	<description>Library management system</description>
 	<properties>
+		<kafka.version>3.5.1</kafka.version>
+		<spring-kafka.version>3.1.1</spring-kafka.version>
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
@@ -111,6 +113,13 @@
 			<groupId>org.drools</groupId>
 			<artifactId>drools-mvel</artifactId>
 			<version>9.44.0.Final</version>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
 		</dependency>
 
 
