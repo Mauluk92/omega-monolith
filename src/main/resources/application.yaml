@@ -1,11 +1,11 @@
 spring:
   liquibase:
     change-log: /db/changelog/root-changelog.xml
-    driver-class-name: org.mariadb.jdbc.Driver
+    driver-class-name: org.h2.Driver
     user: test
     password: test
   datasource:
-    url: jdbc:mariadb://localhost:3306/omega_legacy
+    url: jdbc:h2:file:./data/omega_legacy
     username: test
     password: test
   batch:
@@ -31,6 +31,9 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8080/realms/OmegaLegacy
+  h2:
+    console:
+      enabled: true
 
 server:
   port: 8082

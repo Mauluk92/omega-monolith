@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="01-02-2024-changeset-resource_operation-01" author="nicola" runOnChange="true">
+        <createTable tableName="resource_operation">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="type_operation" type="varchar(255)">
+                <constraints nullable="false" checkConstraint="CHECK( type_operation IN ('INSERTION', 'REMOVAL', 'UPDATE') )"/>
+            </column>
+            <column name="operation_status" type="varchar(255)">
+                <constraints nullable="false" checkConstraint="CHECK( operation_status IN ('SUCCESS', 'FAILURE', 'PARTIAL_INSERTION') )"/>
+            </column>
+            <column name="additional_information" type="varchar(255)"/>
+            <column name="address" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="resource" type="longtext" >
+                <constraints checkConstraint="CHECK ( JSON_VALID(resource) )" nullable="false"/>
+            </column>
+            <column name="timestamp" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

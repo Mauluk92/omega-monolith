@@ -5,53 +5,37 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
 
-    <!-- CATALOG -->
-
     <!-- BOOK SECTION -->
-    <include file="/db/changelog/2024/01/18-01-book-changelog.xml"/>
-    <include file="/db/changelog/2024/01/18-01-book-fix-01-changelog.xml"/>
-    <include file="/db/changelog/2024/01/19-01-book-cutter-changelog.xml"/>
+    <include file="/db/changelog/2024/02/01/01-02-2024-changelog-book-01.xml"/>
+    <include file="/db/changelog/2024/02/01/01-02-2024-changelog-book-02.xml"/>
     <!-- END BOOK SECTION -->
 
     <!-- AUTHOR SECTION -->
-    <include file="/db/changelog/2024/01/18-01-author-changelog.xml"/>
+    <include file="/db/changelog/2024/02/01/01-02-2024-changelog-author-01.xml"/>
     <!-- END AUTHOR SECTION -->
 
     <!-- TAG SECTION -->
-    <include file="/db/changelog/2024/01/18-01-tag-changelog.xml"/>
+    <include file="/db/changelog/2024/02/01/01-02-2024-changelog-tag-01.xml"/>
     <!-- END TAG SECTION -->
 
-    <!-- JOIN TABLES SECTION -->
-    <include file="/db/changelog/2024/01/18-01-book_author-changelog.xml"/>
-    <include file="/db/changelog/2024/01/18-01-book_tag-changelog.xml"/>
-    <include file="/db/changelog/2024/01/19-01-auto-increment-join-tables-changelog.xml"/>
-    <!-- END JOIN TABLES SECTION -->
+    <!-- BOOK_AUTHOR SECTION JOIN TABLE -->
+    <include file="/db/changelog/2024/02/01/01-02-2024-changelog-book_author-01.xml"/>
+    <!-- END BOOK_AUTHOR SECTION JOIN TABLE -->
 
-    <!-- END CATALOG -->
-
-    <!-- LOAN -->
+    <!-- BOOK_TAG SECTION JOIN TABLE -->
+    <include file="/db/changelog/2024/02/01/01-02-2024-changelog-book_tag-01.xml"/>
+    <!-- END BOOK_TAG SECTION JOIN TABLE -->
 
     <!-- LOAN SECTION -->
-    <include file="/db/changelog/2024/01/19-01-loan-init-changelog-01.xml"/>
-    <include file="/db/changelog/2024/01/19-01-loan-relationships-changelog-01.xml"/>
-    <include file="/db/changelog/2024/01/21-01-changelog-loan-table-02.xml"/>
+    <include file="/db/changelog/2024/02/01/01-02-2024-changelog-loan-01.xml"/>
     <!-- END LOAN SECTION -->
 
-    <!-- USER SECTION -->
-    <include file="/db/changelog/2024/01/19-01-user-init-changelog-01.xml"/>
-    <!-- END USER SECTION -->
+    <!-- REQUEST_RESOURCE SECTION -->
+    <include file="/db/changelog/2024/02/01/01-02-2024-changelog-request_operation-01.xml"/>
+    <!-- END REQUEST_RESOURCE SECTION -->
 
-    <!-- END LOAN -->
+    <!-- RESOURCE_OPERATION SECTION -->
+    <include file="/db/changelog/2024/02/01/01-02-2024-changelog-resource_operation-01.xml"/>
+    <!-- END RESOURCE_OPERATION SECTION -->
 
-    <!-- RESOURCES SECTION -->
-    <include file="/db/changelog/2024/01/26-01-resource-init-changelog.xml"/>
-    <!-- END RESOURCES SECTION -->
-
-    <!-- GROUP AND SCOPE SECTION -->
-    <include file="/db/changelog/2024/01/28-01-user-01-changelog.xml"/>
-    <!-- END GROUP AND SCOPE SECTION -->
-
-    <!-- ROLLBACK-30-1 -->
-    <include file="/db/changelog/2024/01/30-01-rollback-01-changelog.xml"/>
-    <!-- END ROLLBACK SECTION -->
 </databaseChangeLog>
