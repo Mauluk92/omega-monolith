@@ -50,4 +50,8 @@
     <!-- GROUP AND SCOPE SECTION -->
     <include file="/db/changelog/2024/01/28-01-user-01-changelog.xml"/>
     <!-- END GROUP AND SCOPE SECTION -->
+
+    <!-- ROLLBACK-30-1 -->
+    <include file="/db/changelog/2024/01/30-01-rollback-01-changelog.xml"/>
+    <!-- END ROLLBACK SECTION -->
 </databaseChangeLog>

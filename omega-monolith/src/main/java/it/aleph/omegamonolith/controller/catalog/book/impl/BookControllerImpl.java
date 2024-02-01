@@ -4,6 +4,7 @@ import it.aleph.omegamonolith.controller.catalog.book.BookController;
 import it.aleph.omegamonolith.dto.catalog.book.AssociateBookDto;
 import it.aleph.omegamonolith.dto.catalog.book.BookDto;
 import it.aleph.omegamonolith.dto.catalog.book.CreateBookDto;
+import it.aleph.omegamonolith.keycloak.service.AuthenticationService;
 import it.aleph.omegamonolith.service.catalog.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BookControllerImpl implements BookController {
 
     private final BookService bookService;
+
 
     @Override
     public CreateBookDto addBook(CreateBookDto createBookDto){

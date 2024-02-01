@@ -1,6 +1,5 @@
 package it.aleph.omegamonolith.dto.resource.request;
 
-import it.aleph.omegamonolith.model.user.User;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +9,7 @@ import java.util.Map;
 @Getter
 @Setter
 public class RequestedResourceOperationDto {
+
     @NotNull
     private RequestedTypeOperationDto requestedTypeOperationDto;
     @NotNull
@@ -20,6 +20,10 @@ public class RequestedResourceOperationDto {
     @NotNull
     private Map<String, Object> resource;
     @NotNull
-    private User associatedUser;
+    private String address;
+    @NotNull
+    private String associatedUser;
+    @NotNull
+    private Boolean executed;
 
 }

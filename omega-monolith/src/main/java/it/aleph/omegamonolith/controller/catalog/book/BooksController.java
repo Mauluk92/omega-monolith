@@ -1,10 +1,6 @@
 package it.aleph.omegamonolith.controller.catalog.book;
 
 import it.aleph.omegamonolith.dto.catalog.book.BookDto;
-import org.springframework.batch.core.JobParametersInvalidException;
-import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
-import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
-import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

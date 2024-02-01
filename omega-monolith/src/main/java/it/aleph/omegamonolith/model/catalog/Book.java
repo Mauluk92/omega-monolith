@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -27,7 +28,7 @@ public class Book {
     @Column(nullable=false, name="description")
     private String description;
     @Column(nullable=false, name="pub_date")
-    private LocalDate pubDate;
+    private Date pubDate;
     @Column(nullable=false, name="pub_house")
     private String pubHouse;
     @Column(nullable=false, name="availability")

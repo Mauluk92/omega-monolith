@@ -2,19 +2,26 @@ package it.aleph.omegalegacy;
 import it.aleph.omegamonolith.model.catalog.Book;
 import it.aleph.omegamonolith.cutter.model.CutterNumberFact;
 import it.aleph.omegamonolith.cutter.error.CutterError;
+import it.aleph.omegamonolith.callnumber.CallNumberTable;
+import java.lang.RuntimeException;
 import java.util.Map;
-import java.lang.String;
+import java.lang.String
+import java.util.regex.Pattern
+import java.util.regex.Matcher;
 
 
 
 function String calculateCutterNumber(Map globalMatcher, Map expansionMatchers, String accessPoint, int numberOfExpansions){
-    String firstCutterNumber = String.valueOf(accessPoint.charAt(0)).toUpperCase() + globalMatcher.get(String.valueOf(accessPoint.charAt(1))).toString();
-    String expansions = expansionMatchers.get(accessPoint.substring(2,3)).toString();
-    StringBuilder extraExpansions = new StringBuilder();
-    for(int i = 0; i < numberOfExpansions; i++){
-        extraExpansions.append(expansionMatchers.get(accessPoint.substring(3 + i, i + 4)));
+    StringBuilder firstCharCutter = new StringBuilder(accessPoint.substring(0,1).toUpperCase());
+    for (Object keyRegex : globalMatcher.keySet()){
+        StringBuilder extraExpansions = new StringBuilder();
+        if(accessPoint.substring(1,3).startsWith(keyRegex.toString())){
+            firstCharCutter.append(globalMatcher.get(keyRegex).toString());
+            extraExpansions.append(expansionMatchers.get(accessPoint.substring(keyRegex.toString().length() + 1, keyRegex.toString().length() + 2)));
+            return firstCharCutter.toString() + extraExpansions;
+        }
     }
-    return firstCutterNumber + expansions + extraExpansions;
+    return "";
 
 }
 

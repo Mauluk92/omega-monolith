@@ -3,6 +3,7 @@ package it.aleph.omegamonolith.config.kafka;
 import it.aleph.omegamonolith.dto.resource.request.RequestedResourceOperationDto;
 import it.aleph.omegamonolith.dto.resource.response.ResourceOperationDto;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.consumer.RangeAssignor;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -40,6 +41,9 @@ public class KafkaConfiguration {
         props.put(
                 ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
                 JsonDeserializer.class);
+        props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG,
+                10);
+        props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
         return props;
     }
 
@@ -116,6 +120,7 @@ public class KafkaConfiguration {
         props.put(
                 ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
                 StringDeserializer.class);
+
         return new DefaultKafkaConsumerFactory<>(props);
     }
 
@@ -143,7 +148,9 @@ public class KafkaConfiguration {
 
     @Bean
     public KafkaTemplate<String, ResourceOperationDto> kafkaTemplate(){
-        return new KafkaTemplate<>(producerFactory());
+        var kafkaTemplate = new KafkaTemplate<>(producerFactory());
+        kafkaTemplate.setDefaultTopic("report-book-response");
+        return kafkaTemplate;
     }
 
     @Bean
