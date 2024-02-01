@@ -2,6 +2,7 @@ package it.aleph.omegamonolith.controller.advice;
 
 import it.aleph.omegamonolith.error.OmegaAPIError;
 import it.aleph.omegamonolith.exception.CutterProcessingException;
+import it.aleph.omegamonolith.exception.JobException;
 import it.aleph.omegamonolith.exception.NotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -62,6 +63,18 @@ public class OmegaControllerAdvice {
                 .path(request.getRequestURL().toString())
                 .message(ex.getMessage())
                 .errorMessages(ex.getMessageCauseList())
+                .build();
+    }
+
+    @ExceptionHandler(JobException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public OmegaAPIError handleJobException(JobException ex, HttpServletRequest request){
+        return OmegaAPIError.builder()
+                .status(HttpStatus.BAD_REQUEST.value())
+                .timestamp(Instant.now())
+                .path(request.getRequestURL().toString())
+                .message(ex.getMessage())
+                .errorMessages(ex.getErrorMessages())
                 .build();
     }
 

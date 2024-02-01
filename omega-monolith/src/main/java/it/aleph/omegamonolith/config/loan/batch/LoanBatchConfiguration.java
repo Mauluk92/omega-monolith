@@ -58,10 +58,9 @@ public class LoanBatchConfiguration {
 
     @Bean
     public Job updateLoanStatusJob(JobRepository jobRepository,
-                                   JobExecutionListener jobExecutionListener,
                                    @Qualifier("updateStep") Step updateStep){
         return new JobBuilder("updateLoanStatusJob", jobRepository)
                 .start(updateStep)
-                .listener(jobExecutionListener).build();
+                .build();
     }
 }

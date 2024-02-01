@@ -1,8 +1,6 @@
 package it.aleph.omegamonolith.model.resource.request;
 
-import it.aleph.omegamonolith.model.catalog.Book;
 import it.aleph.omegamonolith.model.resource.converter.ResourceConverter;
-import it.aleph.omegamonolith.model.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,11 +26,14 @@ public class RequestedResourceOperation {
     private String additionalInformation;
     @Column(name="valid", nullable = false)
     private Boolean valid;
+    @Column(name="address", nullable = false)
+    private String address;
     @Column(name="resource", nullable = false)
     @Convert(converter = ResourceConverter.class)
     private Map<String, Object> resource;
-    @ManyToOne
-    @JoinColumn(name="user_id", nullable = false)
-    private User associatedUser;
+    @Column(name="username", nullable = false)
+    private String associatedUser;
+    @Column(name="executed", nullable = false)
+    private Boolean executed;
     
 }

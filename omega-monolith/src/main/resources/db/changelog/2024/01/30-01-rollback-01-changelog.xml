@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="30-01-rollback-changeset-01" author="nicola" runOnChange="true">
+        <rollback changeSetPath="db/changelog/2024/01/28-01-user-01-changelog.xml" changeSetAuthor="nicola" changeSetId="28-01-user-01-changeset-01"/>
+        <rollback changeSetPath="db/changelog/2024/01/28-01-user-01-changelog.xml" changeSetAuthor="nicola" changeSetId="28-01-user-01-changeset-02"/>
+        <rollback changeSetPath="db/changelog/2024/01/28-01-user-01-changelog.xml" changeSetAuthor="nicola" changeSetId="28-01-user-01-changeset-03"/>
+        <rollback changeSetPath="db/changelog/2024/01/28-01-user-01-changelog.xml" changeSetAuthor="nicola" changeSetId="28-01-user-01-changeset-04"/>
+    </changeSet>
+
+    <changeSet id="30-01-rollback-changeset-02" author="nicola" runOnChange="true">
+        <dropColumn tableName="request_operation" columnName="requested_type_operation"/>
+        <addColumn tableName="request_operation">
+            <column name="requested_type_operation" type="varchar(255)">
+                <constraints nullable="false" checkConstraint="CHECK( requested_type_operation IN ( 'INSERTION', 'REMOVAL', 'UPDATE' ) )"/>
+            </column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

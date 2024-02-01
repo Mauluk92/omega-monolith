@@ -8,9 +8,9 @@ import it.aleph.omegamonolith.mapper.loan.LoanDtoMapper;
 import it.aleph.omegamonolith.model.loan.Loan;
 import it.aleph.omegamonolith.service.catalog.BookService;
 import it.aleph.omegamonolith.service.loan.LoanService;
-import it.aleph.omegamonolith.service.user.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -23,7 +23,6 @@ public class LoanServiceImpl implements LoanService {
 
     private final LoanRepository loanRepository;
     private final LoanDtoMapper loanDtoMapper;
-    private final UserService userService;
     private final BookService bookService;
 
     @Override
@@ -39,8 +38,9 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public LoanDto issueLoan(LoanDto loanDto) {
         loanDto.setIssuedTimestamp(Instant.now());
-        loanDto.setAssociatedUser(userService.findUserById(loanDto.getUserId()));
         loanDto.setAssociatedBook(bookService.getBookById(loanDto.getBookId()));
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        loanDto.setAssociatedUser(userDetails.getUsername());
         Optional<Loan> loanObtained = Optional.ofNullable(loanRepository.findOverlappingLoans(loanDto.getBookId(), loanDto.getStartDate(), loanDto.getEndDate()));
         loanObtained.ifPresentOrElse(l -> loanDto.setLoanStatus(LoanStatusDto.REJECTED), () -> loanDto.setLoanStatus(LoanStatusDto.ISSUED));
         loanRepository.save(loanDtoMapper.toEntity(loanDto));
