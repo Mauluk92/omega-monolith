@@ -4,8 +4,11 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
-    <changeSet id="19-01-join-tables-changeset-01" author="nicola" runOnChange="true">
-        <addAutoIncrement tableName="book_author" columnName="book_author_id" columnDataType="bigint"/>
-        <addAutoIncrement tableName="book_tag" columnName="book_tag_id" columnDataType="bigint"/>
+    <changeSet id="01-02-2024-changeset-book-02" author="nicola" runOnChange="true">
+        <addColumn tableName="book">
+            <column name="title" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
     </changeSet>
 </databaseChangeLog>

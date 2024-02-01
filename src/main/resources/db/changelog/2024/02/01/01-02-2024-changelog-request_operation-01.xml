@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="01-02-2024-changeset-request_operation-01" author="nicola" runOnChange="true">
+        <createTable tableName="request_operation">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="true"/>
+            </column>
+            <column name="executed" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="valid" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="requested_type_operation" type="varchar(255)">
+                <constraints nullable="false" checkConstraint="CHECK( requested_type_operation IN ('INSERTION', 'REMOVAL', 'UPDATE') )"/>
+            </column>
+            <column name="resource" type="longtext">
+                <constraints nullable="false" checkConstraint="CHECK ( JSON_VALID(resource) )"/>
+            </column>
+            <column name="additional_information" type="varchar(255)"/>
+            <column name="resource_type" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

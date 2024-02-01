@@ -4,17 +4,16 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
-
-    <changeSet id="18-01-book_author-changeset-01" author="nicola" runOnChange="true">
+    <changeSet id="01-02-2024-changeset-book_author-01" author="nicola" runOnChange="true">
         <createTable tableName="book_author">
-            <column name="book_author_id" type="bigint">
+            <column name="id" autoIncrement="true" type="bigint">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="book_id" type="bigint">
-                <constraints referencedTableName="book" referencedColumnNames="id" foreignKeyName="fk_book_id_author"/>
+                <constraints foreignKeyName="fk_book_author" referencedTableName="book" referencedColumnNames="id"/>
             </column>
             <column name="author_id" type="bigint">
-                <constraints referencedTableName="author" referencedColumnNames="id" foreignKeyName="fk_author_id_book"/>
+                <constraints foreignKeyName="fk_author_book" referencedTableName="author" referencedColumnNames="id"/>
             </column>
         </createTable>
     </changeSet>

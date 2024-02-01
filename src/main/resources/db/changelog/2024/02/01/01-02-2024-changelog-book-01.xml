@@ -3,28 +3,31 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-                      https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
-    <changeSet id="18-01-book-changeset-01" author="nicola" runOnChange="true">
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    <changeSet id="01-02-2024-changeset-book-01" author="nicola" runOnChange="true">
         <createTable tableName="book">
             <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
+                <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="title" type="varchar(255)">
+            <column name="pub_house" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="description" type="text">
+            <column name="pub_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cutter_number" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isbn" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="availability" type="boolean">
                 <constraints nullable="false"/>
             </column>
-            <column name="isbn" type="char(13)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="dewey_decimal_code" type="varchar(20)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="pub_date" type="date">
+            <column name="dewey_decimal_code" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
