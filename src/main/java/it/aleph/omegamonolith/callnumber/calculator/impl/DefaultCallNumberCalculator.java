@@ -6,7 +6,7 @@ import it.aleph.omegamonolith.cutter.model.CutterNumberFact;
 import it.aleph.omegamonolith.dao.catalog.BookRepository;
 import it.aleph.omegamonolith.dto.catalog.book.BookDto;
 import it.aleph.omegamonolith.exception.CutterProcessingException;
-import it.aleph.omegamonolith.mapper.catalog.BookCutterFactMapping;
+import it.aleph.omegamonolith.mapper.catalog.BookCutterFactMapper;
 import it.aleph.omegamonolith.model.catalog.Book;
 import lombok.RequiredArgsConstructor;
 import org.kie.api.runtime.KieContainer;
@@ -23,7 +23,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class DefaultCallNumberCalculator implements CallNumberCalculator {
 
-    private final BookCutterFactMapping mapper;
+    private final BookCutterFactMapper mapper;
     private final KieContainer kieContainer;
     private final CallNumberTable<CallNumberTable<String>> callNumberTable;
     private final BookRepository bookRepository;
