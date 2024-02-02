@@ -1,6 +1,6 @@
 package it.aleph.omegamonolith.config.callnumber;
 
-import it.aleph.omegamonolith.callnumber.CallNumberTable;
+import it.aleph.omegamonolith.callnumber.table.CallNumberTable;
 import it.aleph.omegamonolith.config.drools.DroolsConfig;
 import org.kie.api.runtime.KieContainer;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +11,7 @@ public class CallNumberTableConfig {
 
     @Bean
     public CallNumberTable<String> afterInitialVowels(KieContainer kieContainer) {
-        CallNumberTable<String> callNumberTable = new CallNumberTable<>(kieContainer, 5);
+        CallNumberTable<String> callNumberTable = new CallNumberTable<String>(kieContainer, 5);
         callNumberTable.put("b", "2");
         callNumberTable.put("d", "3");
         callNumberTable.put("[l-m]", "4");
@@ -25,7 +25,7 @@ public class CallNumberTableConfig {
 
     @Bean
     public CallNumberTable<String> afterInitialLetterS(KieContainer kieContainer) {
-        CallNumberTable<String> callNumberTable = new CallNumberTable<>(kieContainer, 5);
+        CallNumberTable<String> callNumberTable = new CallNumberTable<String>(kieContainer, 5);
         callNumberTable.setGroups("ch");
         callNumberTable.put("a", "2");
         callNumberTable.put("ch", "3");
@@ -40,7 +40,7 @@ public class CallNumberTableConfig {
 
     @Bean
     public CallNumberTable<String> afterInitialQu(KieContainer kieContainer) {
-        CallNumberTable<String> callNumberTable = new CallNumberTable<>(kieContainer, 5);
+        CallNumberTable<String> callNumberTable = new CallNumberTable<String>(kieContainer, 5);
         callNumberTable.put("a", "3");
         callNumberTable.put("e", "4");
         callNumberTable.put("i", "5");
@@ -53,7 +53,7 @@ public class CallNumberTableConfig {
 
     @Bean
     public CallNumberTable<String> afterInitialAnyOtherConsonants(KieContainer kieContainer) {
-        CallNumberTable<String> callNumberTable = new CallNumberTable<>(kieContainer, 5);
+        CallNumberTable<String> callNumberTable = new CallNumberTable<String>(kieContainer, 5);
         callNumberTable.put("a", "3");
         callNumberTable.put("e", "4");
         callNumberTable.put("i", "5");
@@ -66,7 +66,7 @@ public class CallNumberTableConfig {
 
     @Bean
     public CallNumberTable<String> expansion(KieContainer kieContainer){
-        CallNumberTable<String> callNumberTable = new CallNumberTable<>(kieContainer, 5);
+        CallNumberTable<String> callNumberTable = new CallNumberTable<String>(kieContainer, 5);
         callNumberTable.put("[a-d]", "3");
         callNumberTable.put("[e-h]", "4");
         callNumberTable.put("[i-l]", "5");
@@ -79,7 +79,7 @@ public class CallNumberTableConfig {
 
     @Bean
     public CallNumberTable<CallNumberTable<String>> callNumberTable(KieContainer kieContainer){
-        CallNumberTable<CallNumberTable<String>> callNumberTable = new CallNumberTable<>(kieContainer, 5);
+        CallNumberTable<CallNumberTable<String>> callNumberTable = new CallNumberTable<CallNumberTable<String>>(kieContainer, 5);
         callNumberTable.put("[aeiouy]", afterInitialVowels(kieContainer));
         callNumberTable.put("s", afterInitialLetterS(kieContainer));
         callNumberTable.put("qu", afterInitialQu(kieContainer));

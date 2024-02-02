@@ -7,7 +7,6 @@ import it.aleph.omegamonolith.dto.resource.response.TypeOperationDto;
 import it.aleph.omegamonolith.model.resource.request.RequestedResourceOperation;
 import it.aleph.omegamonolith.model.resource.request.RequestedTypeOperation;
 import it.aleph.omegamonolith.model.resource.response.ResourceOperation;
-import org.mapstruct.EnumMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.NullValuePropertyMappingStrategy;

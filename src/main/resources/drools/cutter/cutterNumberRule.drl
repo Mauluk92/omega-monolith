@@ -2,7 +2,7 @@ package it.aleph.omegalegacy;
 import it.aleph.omegamonolith.model.catalog.Book;
 import it.aleph.omegamonolith.cutter.model.CutterNumberFact;
 import it.aleph.omegamonolith.cutter.error.CutterError;
-import it.aleph.omegamonolith.callnumber.CallNumberTable;
+import it.aleph.omegamonolith.callnumber.table.CallNumberTable;
 import java.lang.RuntimeException;
 import java.util.Map;
 import java.lang.String

@@ -1,4 +1,4 @@
-package it.aleph.omegamonolith.callnumber;
+package it.aleph.omegamonolith.callnumber.table;
 
 import lombok.Getter;
 import lombok.Setter;
