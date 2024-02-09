@@ -5,6 +5,10 @@ import lombok.Setter;
 
 import java.util.List;
 
+/**
+ * Utility POJO class used to encapsulates all information needed for
+ * further processing of a callNumber
+ */
 @Getter
 @Setter
 public class CallNumberFact {

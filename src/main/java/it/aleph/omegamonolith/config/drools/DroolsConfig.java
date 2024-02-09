@@ -8,6 +8,9 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.internal.io.ResourceFactory;
 import org.springframework.context.annotation.Bean;
 
+/**
+ * Drools configuration class, with all rules introduced
+ */
 public class DroolsConfig {
 
 

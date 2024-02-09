@@ -12,6 +12,14 @@ import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * A standard call number table, which represents the mapping between a value inside access point,
+ * and a numeric value (or another mapping yet, since a Cutter Number Table may contain other
+ * subtables).
+ * @see <a href="https://www.loc.gov/aba/pcc/053/table.html">Cutter Table</a>
+ * @param <T> The type value of the cutter table, which should ideally be another
+ *           cutter table or a String
+ */
 
 @Getter
 @Setter

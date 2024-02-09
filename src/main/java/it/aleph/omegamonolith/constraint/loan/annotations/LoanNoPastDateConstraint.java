@@ -1,6 +1,5 @@
 package it.aleph.omegamonolith.constraint.loan.annotations;
 
-import it.aleph.omegamonolith.constraint.loan.validator.LoanDateValidator;
 import it.aleph.omegamonolith.constraint.loan.validator.NoPastDateValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -12,6 +11,10 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
+/**
+ * Constraint specifying that the given date should be past the current date.
+ * Used on date loans
+ */
 @Target({ FIELD})
 @Retention(RUNTIME)
 @Constraint(validatedBy = NoPastDateValidator.class)

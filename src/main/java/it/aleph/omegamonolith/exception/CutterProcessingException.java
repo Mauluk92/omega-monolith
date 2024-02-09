@@ -6,6 +6,9 @@ import lombok.Setter;
 
 import java.util.List;
 
+/**
+ * Cutter Number calculation exception
+ */
 @Getter
 @Setter
 @Builder

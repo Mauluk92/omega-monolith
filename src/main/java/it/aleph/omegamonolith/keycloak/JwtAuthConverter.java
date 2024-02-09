@@ -18,6 +18,10 @@ import java.util.stream.Stream;
 
 import static org.apache.commons.collections4.CollectionUtils.collect;
 
+/**
+ * Jwt Token converter utility class for introducing roles inside
+ * the application
+ */
 @Component
 public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationToken> {
 

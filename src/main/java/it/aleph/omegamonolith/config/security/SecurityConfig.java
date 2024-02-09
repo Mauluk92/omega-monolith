@@ -52,7 +52,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/loan/*").hasAnyAuthority(ROLE_ADMIN_LOAN)
                         .requestMatchers(HttpMethod.PATCH, "/loan/*").hasAnyAuthority(ROLE_ADMIN_LOAN)
 
-                        .requestMatchers(HttpMethod.GET, "/job").hasAnyAuthority(ROLE_ADMIN_JOB))
+                        .requestMatchers(HttpMethod.GET, "/job").hasAnyAuthority(ROLE_ADMIN_JOB)
+
+                        .requestMatchers("/v3/**").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll())
 
                 .csrf(AbstractHttpConfigurer::disable)
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(jwtAuthConverter).decoder(JwtDecoders.fromIssuerLocation("http://localhost:8080/realms/OmegaLegacy"))))

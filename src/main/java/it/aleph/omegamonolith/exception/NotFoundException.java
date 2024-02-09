@@ -6,6 +6,9 @@ import lombok.Setter;
 
 import java.util.List;
 
+/**
+ * Exception class for alla not found resources
+ */
 @Getter
 @Setter
 @Builder

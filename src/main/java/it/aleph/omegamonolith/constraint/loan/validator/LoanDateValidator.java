@@ -8,6 +8,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+/**
+ * This validator checks that the start date is before the end date of a loan.
+ * Ensures the validity of a loan period
+ */
 @Component
 public class LoanDateValidator implements ConstraintValidator<LoanDateConstraint, LoanDto> {
 

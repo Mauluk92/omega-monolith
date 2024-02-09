@@ -7,6 +7,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+/**
+ * This validator ensure that the given date is not a past date, since no loan can
+ * be issued for a time before the current date
+ */
 @Component
 public class NoPastDateValidator implements ConstraintValidator<LoanNoPastDateConstraint, Date> {
 

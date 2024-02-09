@@ -2,6 +2,7 @@ package it.aleph.omegamonolith.providers.controller.catalog.book;
 
 import it.aleph.omegamonolith.dto.catalog.book.BookDto;
 import it.aleph.omegamonolith.instancio.model.AliceInWonderlandModel;
+import it.aleph.omegamonolith.model.catalog.Book;
 import org.instancio.Binding;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -18,7 +19,7 @@ public class UpdateBookControllerProvider implements ArgumentsProvider {
         BookDto bookDtoUpdated = Instancio.of(AliceInWonderlandModel.bookDtoModel())
                 .ignore(Binding.fieldBinding(BookDto.class, "id"))
                 .create();
-        Long bookId = bookDtoUpdated.getId();
-        return Stream.of(Arguments.of(bookId, bookDtoUpdated));
+        BookDto bookToBeUpdated = Instancio.of(AliceInWonderlandModel.bookDtoModel()).create();
+        return Stream.of(Arguments.of(bookToBeUpdated, bookDtoUpdated));
     }
 }

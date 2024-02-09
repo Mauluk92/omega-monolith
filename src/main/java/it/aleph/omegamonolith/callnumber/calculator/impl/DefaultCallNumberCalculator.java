@@ -19,6 +19,11 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * This is the default implementation of call number calculator, which is externalized
+ * via Drool Rule. The calculator uses a standard cutter number table
+ * @see CallNumberTable
+ */
 @Component
 @RequiredArgsConstructor
 public class DefaultCallNumberCalculator implements CallNumberCalculator {

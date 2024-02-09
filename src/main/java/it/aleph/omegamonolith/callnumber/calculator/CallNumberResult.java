@@ -1,9 +1,12 @@
 package it.aleph.omegamonolith.callnumber.calculator;
 
-import it.aleph.omegamonolith.dto.catalog.book.BookDto;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * This POJO encapsulates the results from a call number calculation using a
+ * @see CallNumberCalculator
+ */
 @Getter
 @Setter
 public class CallNumberResult {

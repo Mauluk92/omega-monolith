@@ -39,7 +39,18 @@ public class BookServiceImpl implements BookService {
     private final CallNumberCalculator calculator;
     private final List<ObjectFactory<BookSpecificationBuilder>> specificationFactory;
 
-
+    /**
+     * The process of creating a book is the following:
+     * First, all authors and tags are found according to the idList provided by CreateBookDto POJO
+     * If ANY of the given id does not correspond to an entity, an exception is raised,
+     * otherwise a call number can be calculated via CutterNumberCalculator.
+     * If the book is already registered (it has the same ISBN and the same ADDRESS of the introduced book),
+     * an exception is raised. Note: an address corresponds to the concatenation of dewey decimal code, cutter number and
+     * publication date of the book.
+     * At the end of this process, the book is saved.
+     * @param createBookDto a dto with the purpose of issuing a creation of a new book inside the library
+     * @return the saved Book
+     */
     @Override
     public BookDto addBook(CreateBookDto createBookDto) {
         List<AuthorDto> authorList = authorService.findAllByIdList(createBookDto.getAuthorIdList());
