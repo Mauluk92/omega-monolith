@@ -10,6 +10,7 @@ import it.aleph.omegamonolith.service.catalog.AuthorService;
 import it.aleph.omegamonolith.specification.catalog.AuthorSpecificationBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.ListableBeanFactory;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +19,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +28,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     private final AuthorRepository authorRepository;
     private final AuthorDtoMapper authorDtoMapper;
-    private final ListableBeanFactory beanFactory;
+    private final List<ObjectFactory<AuthorSpecificationBuilder>> beanFactory;
 
 
 
@@ -64,8 +66,19 @@ public class AuthorServiceImpl implements AuthorService {
         return authorDtoMapper.toDtoList(pageAuthors.toList());
     }
 
+    @Override
+    public List<AuthorDto> findAllByIdList(List<Long> idAuthorList){
+        List<Author> authorList = authorRepository.findAllById(idAuthorList);
+        if(authorList.size() != idAuthorList.size()){
+            List<Long> idFoundList = authorList.stream().map(Author::getId).toList();
+            List<Long> idNotFoundList = idAuthorList.stream().filter(idFoundList::contains).toList();
+            throw buildNotFoundException(idNotFoundList);
+        }
+        return authorDtoMapper.toDtoList(authorList);
+    }
+
     private Specification<Author> buildSpecification(SearchAuthorsDto searchAuthorsDto){
-        List<AuthorSpecificationBuilder> specificationBuilderList = beanFactory.getBeansOfType(AuthorSpecificationBuilder.class).values().stream().toList();
+        List<AuthorSpecificationBuilder> specificationBuilderList = beanFactory.stream().map(ObjectFactory::getObject).toList();
         return specificationBuilderList.stream()
                 .map(specificationBuilder ->
                         specificationBuilder.setFilter(searchAuthorsDto).build())

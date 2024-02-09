@@ -19,12 +19,12 @@ public interface LoanController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     LoanDto issueLoan(@RequestBody @Valid LoanDto loanDto);
-    @PatchMapping("{id}")
+    @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     LoanDto updateLoanStatus(@PathVariable(name="id") Long id,
                              @RequestBody @Valid @NotNull LoanStatusDto loanStatusDto);
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void removeLoan(@PathVariable(name="id") Long id);
 }

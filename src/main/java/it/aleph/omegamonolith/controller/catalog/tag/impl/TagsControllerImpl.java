@@ -16,9 +16,9 @@ public class TagsControllerImpl implements TagsController {
     private final TagService tagService;
 
 
-    public List<TagDto> getAllTags(@RequestParam(defaultValue = "10") Integer pageSize,
-                                   @RequestParam(defaultValue = "0") Integer pageNum,
-                                   @RequestParam(required = false) String tag){
+    public List<TagDto> getAllTags( Integer pageSize,
+                                    Integer pageNum,
+                                    String tag){
         return tagService.getAllTags(pageNum, pageSize, tag);
     }
 }

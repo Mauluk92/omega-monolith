@@ -10,7 +10,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-public class AutorsControllerImpl implements AuthorsController {
+public class AuthorsControllerImpl implements AuthorsController {
 
     private final AuthorService authorService;
     public List<AuthorDto> searchAuthors(Integer pageNum,

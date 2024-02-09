@@ -15,7 +15,8 @@ import java.util.Date;
 @Setter
 @LoanDateConstraint
 public class LoanDto {
-
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Long id;
     @NotNull
     @LoanNoPastDateConstraint
     private Date startDate;

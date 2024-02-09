@@ -10,6 +10,7 @@ import it.aleph.omegamonolith.service.catalog.TagService;
 import it.aleph.omegamonolith.specification.catalog.TagSpecificationBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.ListableBeanFactory;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +26,7 @@ public class TagServiceImpl implements TagService {
 
     private final TagRepository tagRepository;
     private final TagDtoMapper tagDtoMapper;
-    private final ListableBeanFactory beanFactory;
+    private final List<ObjectFactory<TagSpecificationBuilder>> beanFactory;
 
     @Override
     public TagDto addTag(TagDto createTagDto) {
@@ -61,8 +62,20 @@ public class TagServiceImpl implements TagService {
         return tagDtoMapper.toDtoList(pageOfTags.toList());
     }
 
+    @Override
+    public List<TagDto> findAllByIdList(List<Long> idTagList){
+        List<Tag> tagListFound = tagRepository.findAllById(idTagList);
+        if(tagListFound.size() != idTagList.size()){
+            List<Long> idFoundList = tagListFound.stream().map(Tag::getId).toList();
+            List<Long> idNotFoundList = idTagList.stream().filter(idFoundList::contains).toList();
+            throw buildNotFoundException(idNotFoundList);
+        }
+        return tagDtoMapper.toDtoList(tagListFound);
+
+    }
+
     private Specification<Tag> buildSpecification(SearchTagsDto searchTagsDto) {
-        List<TagSpecificationBuilder> specificationBuilderList = beanFactory.getBeansOfType(TagSpecificationBuilder.class).values().stream().toList();
+        List<TagSpecificationBuilder> specificationBuilderList = beanFactory.stream().map(ObjectFactory::getObject).toList();
         return specificationBuilderList.stream()
                 .map(specificationBuilder ->
                         specificationBuilder.setFilter(searchTagsDto).build())
@@ -70,9 +83,13 @@ public class TagServiceImpl implements TagService {
                 .orElse(null);
     }
 
+
+
     private Tag accessResource(Long id){
         return tagRepository.findById(id).orElseThrow(() -> buildNotFoundException(List.of(id)));
     }
+
+
 
     private RuntimeException buildNotFoundException(List<Long> idList) {
         return NotFoundException.builder().idListNotFound(idList).message("The following id was not found: ").build();
