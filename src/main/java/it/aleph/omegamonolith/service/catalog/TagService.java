@@ -12,4 +12,5 @@ public interface TagService {
     void removeTagById(Long id);
     TagDto updateTagById(Long id, TagDto updateTagDto);
     List<TagDto> getAllTags(Integer pageNum, Integer pageSize, String tag);
+    List<TagDto> findAllByIdList(List<Long> tagIdList);
 }

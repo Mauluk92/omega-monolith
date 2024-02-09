@@ -10,7 +10,7 @@ import java.util.List;
 public interface TagsController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    List<TagDto> getAllTags(@RequestParam(defaultValue = "10") Integer pageSize,
-                            @RequestParam(defaultValue = "0") Integer pageNum,
-                            @RequestParam(required = false) String tag);
+    List<TagDto> getAllTags(@RequestParam(defaultValue = "10", name = "pageSize") Integer pageSize,
+                            @RequestParam(defaultValue = "0", name = "pageNum") Integer pageNum,
+                            @RequestParam(required = false, name = "tag") String tag);
 }

@@ -12,7 +12,7 @@ public interface AuthorsController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    List<AuthorDto> searchAuthors(@RequestParam(defaultValue = "0") Integer pageNum,
-                                  @RequestParam(defaultValue = "10")Integer pageSize,
-                                  @RequestParam(required = false) String name);
+    List<AuthorDto> searchAuthors(@RequestParam(defaultValue = "0", name = "pageNum") Integer pageNum,
+                                  @RequestParam(defaultValue = "10", name = "pageSize")Integer pageSize,
+                                  @RequestParam(required = false, name = "name") String name);
 }

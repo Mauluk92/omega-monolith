@@ -11,4 +11,5 @@ public interface AuthorService {
     void removeAuthorById(Long id);
     AuthorDto updateAuthorById(Long id, AuthorDto updated);
     List<AuthorDto> searchAuthors(Integer pageSize, Integer pageNum, String name);
+    List<AuthorDto> findAllByIdList(List<Long> idAuthorList);
 }

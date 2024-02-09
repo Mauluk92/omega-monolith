@@ -14,13 +14,13 @@ public interface TagController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    TagDto getTabById(@PathVariable Long id);
+    TagDto getTabById(@PathVariable(name = "id") Long id);
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void deleteTagById(@PathVariable Long id);
+    void deleteTagById(@PathVariable(name = "id") Long id);
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    TagDto updateTagById(@PathVariable Long id, @RequestBody @Valid TagDto updateTagDto);
+    TagDto updateTagById(@PathVariable(name = "id") Long id, @RequestBody @Valid TagDto updateTagDto);
 }

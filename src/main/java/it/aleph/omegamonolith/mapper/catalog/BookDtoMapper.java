@@ -27,6 +27,9 @@ public interface BookDtoMapper {
     void updateBook(@MappingTarget Book toUpdate, BookDto updated);
     List<BookDto> toBookDtoList(List<Book> entityList);
 
+    Book toEntity(BookDto bookDto);
+
+    BookDto toDto(CreateBookDto createBookDto);
     default Map<String, Object> toMap(BookDto bookDto){
         Map<String, Object> map = new HashMap<>();
         map.put("cutterNumber", bookDto.getCutterNumber());

@@ -15,16 +15,13 @@ public interface BookController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    CreateBookDto addBook(@RequestBody @Valid CreateBookDto createBookDto);
+    BookDto addBook(@RequestBody @Valid CreateBookDto createBookDto);
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     BookDto getBookById(@PathVariable(name="id") Long id);
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     BookDto updateBookStatus(@PathVariable("id") Long id,@RequestBody @Valid @NotNull Boolean status);
-    @PatchMapping("/associate/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    BookDto associateBook(@PathVariable("id") Long id, @RequestBody @Valid AssociateBookDto associateBookDto);
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void removeBookById(@PathVariable("id") Long id);

@@ -20,7 +20,7 @@ public class BookDto {
     @NotNull
     private String title;
     @NotNull
-    @Pattern(regexp = "^\\d{13}$", message = "ISBN should have exactly 10 numbers")
+    @Pattern(regexp = "^\\d{13}$", message = "ISBN should have exactly 13 numbers")
     private String isbn;
     @NotNull
     @Pattern(regexp = "^\\d{3}\\.\\d+$", message = "Dewey Decimal Code should have the following format: xxx.xx...")

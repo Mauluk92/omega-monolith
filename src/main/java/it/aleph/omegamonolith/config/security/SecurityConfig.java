@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.oauth2.jwt.JwtDecoders;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -53,7 +54,7 @@ public class SecurityConfig {
 
                         .requestMatchers(HttpMethod.GET, "/job").hasAnyAuthority(ROLE_ADMIN_JOB))
 
-                .csrf().disable()
+                .csrf(AbstractHttpConfigurer::disable)
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(jwtAuthConverter).decoder(JwtDecoders.fromIssuerLocation("http://localhost:8080/realms/OmegaLegacy"))))
                 .build();
 
