@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+
+    <!-- BOOK SECTION -->
+    <include file="/db/changelog/2024/02/01/01-02-2024-changelog-book-01.xml"/>
+    <include file="/db/changelog/2024/02/01/01-02-2024-changelog-book-02.xml"/>
+    <!-- END BOOK SECTION -->
+
+    <!-- AUTHOR SECTION -->
+    <include file="/db/changelog/2024/02/01/01-02-2024-changelog-author-01.xml"/>
+    <!-- END AUTHOR SECTION -->
+
+    <!-- TAG SECTION -->
+    <include file="/db/changelog/2024/02/01/01-02-2024-changelog-tag-01.xml"/>
+    <!-- END TAG SECTION -->
+
+    <!-- BOOK_AUTHOR SECTION JOIN TABLE -->
+    <include file="/db/changelog/2024/02/01/01-02-2024-changelog-book_author-01.xml"/>
+    <!-- END BOOK_AUTHOR SECTION JOIN TABLE -->
+
+    <!-- BOOK_TAG SECTION JOIN TABLE -->
+    <include file="/db/changelog/2024/02/01/01-02-2024-changelog-book_tag-01.xml"/>
+    <!-- END BOOK_TAG SECTION JOIN TABLE -->
+
+    <!-- LOAN SECTION -->
+    <include file="/db/changelog/2024/02/01/01-02-2024-changelog-loan-01.xml"/>
+    <!-- END LOAN SECTION -->
+
+    <!-- REQUEST_RESOURCE SECTION -->
+    <include file="/db/changelog/2024/02/01/01-02-2024-changelog-request_operation-01.xml"/>
+    <!-- END REQUEST_RESOURCE SECTION -->
+
+    <!-- RESOURCE_OPERATION SECTION -->
+    <include file="/db/changelog/2024/02/01/01-02-2024-changelog-resource_operation-01.xml"/>
+    <!-- END RESOURCE_OPERATION SECTION -->
+
+</databaseChangeLog>

@@ -1,0 +1,39 @@
+spring:
+  liquibase:
+    change-log: /db/changelog/root-changelog.xml
+    driver-class-name: org.h2.Driver
+    user: test
+    password: test
+  datasource:
+    url: jdbc:h2:file:./data/omega_legacy
+    username: test
+    password: test
+  batch:
+    jdbc:
+      initialize-schema: always
+  kafka:
+    bootstrap-servers: http://localhost:9092
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/OmegaLegacy
+            token-uri: http://localhost:8080/realms/OmegaLegacy/oauth2/openid-connect/token
+            authorization-uri: http://localhost:8080/realms/OmegaLegacy/oauth2/openid-connect/auth
+        registration:
+          keycloak:
+            client-id: login-app
+            client-secret: 6dvPH7vKb7g0rkTmjsALukcg635RJT1k
+            authorization-grant-type: password
+            scope:
+              - resource
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/OmegaLegacy
+  h2:
+    console:
+      enabled: true
+
+server:
+  port: 8082

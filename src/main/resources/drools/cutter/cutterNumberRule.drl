@@ -1,0 +1,75 @@
+package it.aleph.omegalegacy;
+import it.aleph.omegamonolith.model.catalog.Book;
+import it.aleph.omegamonolith.cutter.model.CutterNumberFact;
+import it.aleph.omegamonolith.cutter.error.CutterError;
+import it.aleph.omegamonolith.callnumber.table.CallNumberTable;
+import java.lang.RuntimeException;
+import java.util.Map;
+import java.lang.String
+import java.util.regex.Pattern
+import java.util.regex.Matcher;
+
+
+
+function String calculateCutterNumber(Map globalMatcher, Map expansionMatchers, String accessPoint, int numberOfExpansions){
+    StringBuilder firstCharCutter = new StringBuilder(accessPoint.substring(0,1).toUpperCase());
+    for (Object keyRegex : globalMatcher.keySet()){
+        StringBuilder extraExpansions = new StringBuilder();
+        if(accessPoint.substring(1,3).startsWith(keyRegex.toString())){
+            firstCharCutter.append(globalMatcher.get(keyRegex).toString());
+            extraExpansions.append(expansionMatchers.get(accessPoint.substring(keyRegex.toString().length() + 1, keyRegex.toString().length() + 2)));
+            return firstCharCutter.toString() + extraExpansions;
+        }
+    }
+    return "";
+
+}
+
+function CutterError buildError(String cause){
+    return CutterError.builder().message("An error occurred during elaboration of cutter number").cause(cause).build();
+}
+
+dialect "mvel";
+salience 100;
+
+
+rule "Initial assignement cutter number"
+
+when
+    $fact : CutterNumberFact(cutterNumber == null)
+then
+    if($fact.getAccessPoint().length() < 3){
+        $fact.setCutterError(buildError("Access point too short! Please select another access point for the given resource!"));
+    }else{
+       $fact.setCutterNumber(calculateCutterNumber($fact.getCutterNumberMapping(), $fact.getCutterNumberExpansionMapping(), $fact.getAccessPoint(), 0));
+    }
+end
+
+dialect "mvel";
+salience 80;
+
+rule "Book for expansion"
+
+when
+
+    $fact : CutterNumberFact(cutterNumber != null, bookWithSameCutterNumber != null)
+then
+    int cutterNumberLength = $fact.getBookWithSameCutterNumber().getCutterNumber().length();
+    if(cutterNumberLength == $fact.getBookWithSameCutterNumber().getCutterNumber().length()){
+        $fact.setCutterError(buildError("Access point out of bound. Please select another access point!"));
+    }else{
+        $fact.setCutterNumber(calculateCutterNumber($fact.getCutterNumberMapping(), $fact.getCutterNumberExpansionMapping(), $fact.getAccessPoint(), cutterNumberLength - 2));
+    }
+end
+
+dialect "mvel";
+salience 80;
+
+rule "Book already registered"
+
+when
+    $factWithSameIsbn : CutterNumberFact(bookWithSameCutterNumber != null, bookWithSameCutterNumber.isbn == isbn)
+then
+    $factWithSameIsbn.setCutterError(buildError("Book already registered!"));
+end
+

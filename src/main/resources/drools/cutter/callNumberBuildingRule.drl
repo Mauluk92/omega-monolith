@@ -1,0 +1,19 @@
+package drools.cutter;
+import java.lang.String;
+import java.util.List
+import java.util.regex.Pattern;
+import it.aleph.omegamonolith.callnumber.table.CallNumberFact;
+import java.util.regex.Matcher
+import java.util.regex.MatchResult;
+import java.lang.RuntimeException
+import java.util.ArrayList;
+global String groups;
+
+dialect  "mvel"
+
+rule "callNumberBuildingRule"
+    when
+        $fact : CallNumberFact(matchList.isEmpty(), $fact.getKeyRegex() matches groups)
+    then
+        $fact.setGroupMatch(groups);
+end
